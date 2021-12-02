@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Nearest Event Locator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Gudea:400,700|Rancho" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+  <style type="text/css">
+    h2 {
+      font-family: 'Rancho', cursive;
+    }
+
+    h5 {
+      font-family: 'Gudea', sans-serif;
+      font-weight: bold;
+    }
+
+    #top {
+      opacity: 0.85 !important;
+      z-index: 50;
+      margin-top: 100px;
+    }
+
+    #titlebox {
+      padding: 20px;
+      border-radius: 150px 150px 150px 150px;
+    }
+
+    #nearMeButton,
+    #findButton {
+      z-index: 50;
+      margin: 0px auto;
+      margin-top: 50px;
+      border-radius: 150px 150px 150px 150px;
+    }
+
+    #back {
+      z-index: 0;
+    }
+
+    #high {
+      height: 60%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="slider fullscreen" id="back">
+      <ul class="slides">
+        <li>
+          <img src="https://images.unsplash.com/photo-1458891216473-4f26bb4eb40e?auto=format&fit=crop&w=1500&q=80">
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1492940664705-726225a992a9?auto=format&fit=crop&w=1534&q=80">
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1484494789010-20fc1a011197?auto=format&fit=crop&w=667&q=80">
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1505426101273-b50e6f3ff9a7?auto=format&fit=crop&w=750&q=80">
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1435034568314-8303dbda4b8c?auto=format&fit=crop&w=752&q=80">
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1506845347893-bc5faede1eec?auto=format&fit=crop&w=750&q=80">
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1511854085838-e8808da760f5?auto=format&fit=crop&w=796&q=80">
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1502185372788-6ff455aa92ff?auto=format&fit=crop&w=750&q=80">
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1510586654757-84690a984d74?auto=format&fit=crop&w=889&q=80">
+        </li>
+        <li>
+          <img src="https://images.unsplash.com/photo-1504038056352-c442351fed13?auto=format&fit=crop&w=744&q=80">
+        </li>
+      </ul>
+    </div>
+    <div class="row" id="top">
+      <div class="center-align orange" id="titlebox">
+        <h2 class="white-text">Nearest Event Locator</h2>
+        <h5 class="yellow-text">Taking the "Find Fun Near You" Game To The Next Level</h5>
+      </div>
+    </div>
+    <div class="row" id="buttons high">
+      <div class="col s12 m12 l12 valign-wrapper">
+        <a class="waves-effect waves-light btn-large center-align" id="nearMeButton">Find Events Near Me Now</a>
+        <a class="waves-effect waves-light btn-large center-align" id="findButton" href="Events.html">Find Events Near My Destination</a>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $("#nearMeButton").on("click", function () {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          console.log(pos);
+          sessionStorage.clear();
+          sessionStorage.setItem("Latitude", pos.lat);
+          sessionStorage.setItem("Longitude", pos.lng);
+          console.log("Session Latitude: " + sessionStorage.getItem("Latitude"));
+          console.log("Session Longitude: " + sessionStorage.getItem("Longitude"));
+          window.location.href = "Events.html";
+        });
+      }
+
+    });
+
+    $(document).ready(function () {
+      $('.slider').slider({
+        indicators: false,
+        interval: 10000,
+      });
+    });
+  </script>
+</body>
+
+</html>

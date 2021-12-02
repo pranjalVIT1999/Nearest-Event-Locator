@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+   
+  <body>
+  	 <div id="map"></div>
+
+<script type="text/javascript">
+	  var proxy = 'https://cors-anywhere.herokuapp.com/';
+    
+  // A user's sample location 
+    var loc = ["40.4227829,-74.09269599999999"];
+
+   // Sample latitudes and longitudes for various venues  
+    var lat = ["42.09912156792428","41.77221545716217","40.09580912941788"];
+    var lng = ["-73.36759834374999","-71.57682685937499","-82.56315498437499"];
+
+	  var search = "=";
+
+    for (var i = 0; i < lat.length; i++) {
+    	query = lat[i]+","+lng[i]+"|";
+    	search = search + query; 
+    	
+    }
+
+    // Slice off the last unnecessary pipe 
+    var final = search.slice(0,-1);
+
+    // Build the query
+    var queryURL = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="+loc+"&destinations"+final+"&key=AIzaSyDjlTzVQx8XWIbdCeoNtgeGH0WCWMuigXs";
+
+
+    $.ajax({
+      url: proxy+queryURL,
+      method: 'GET'
+    }).done(function(response) {
+      console.log(response);
+    });	
+
+</script>
+ 
+ 
+  </body>
+
+</html>

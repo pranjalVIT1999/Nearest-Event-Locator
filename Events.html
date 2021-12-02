@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Events</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="https://use.fontawesome.com/700dbb2bc1.js"></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Gudea:400,700|Rancho" rel="stylesheet">
+</head>
+
+<style>
+  #map {
+    position: absolute;
+    height: 60%;
+    width: 59%;
+  }
+
+  .marker {
+    background-image: url('pin.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  #idEventsList {
+    overflow-y: auto;
+    height: 300px;
+  }
+
+  #userinput,
+  #date-container,
+  #location-container,
+  #button-container {
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 10px;
+  }
+
+  .white-text {
+    color: white;
+  }
+
+  .thumbnail {
+    color: #26a69a;
+  }
+
+  #wrapper {
+    height: 100%;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .brand-logo {
+    font-family: 'Rancho', cursive;
+  }
+
+  #NextButton {
+    margin-left: 2em;
+  }
+</style>
+
+<body>
+  <!-- Nav bar starts here  -->
+  <nav>
+    <div class="nav-wrapper orange">
+      <a href="https://komorebi-girl.github.io/StepAway" class="brand-logo">Nearest Event Locator
+</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+          <a href="#">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Here is the search bar    -->
+  <div id="wrapper">
+    <div class="row" id="userinput">
+      <form class="col s12">
+        <div class="row">
+          <div id="location-container" class="input-field col s6">
+            <i class="material-icons prefix">location_city</i>
+            <input id="location-input" type="text" class="validate">
+            <label for="icon_prefix">Location (City, State)</label>
+          </div>
+          <div id="date-container" class="input-field col s4">
+            <i class="material-icons prefix">date_range</i>
+            <input id="date-input" type="text" class="datepicker">
+            <label for="icon_prefix">Date</label>
+          </div>
+          <div id="button-container" class="col s2">
+            <button class="waves-effect waves-light btn center-align" id="submitButton">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <hr>
+    <!-- This is the section for the map and event list  -->
+    <div class="row">
+      <div class="col s8" id="map"></div>
+      <div class="col s4 push-s8">
+        <div id="idEventsList"></div>
+        <div id="idButtons"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Here is the code for the pop up modals -->
+  <div class="modal modal-fixed-footer" id="modal1">
+    <div class="modal-content">
+      <h5 id="name"></h5>
+      <h6 id="venue"></h6>
+      <p id="address"></p>
+      <p id="city"></p>
+      <p>StubHub:
+        <span id="stubHubLink"></span>
+      </p>
+      <p>SeatGeek:
+        <span id="seatGeekLink"></span>
+      </p>
+      <h6>
+        <strong>More About the Event:</strong>
+      </h6>
+      <p id="description"></p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn-flat modal-action modal-close waves-effect waves-red">Close</a>
+    </div>
+  </div>
+
+
+  <script src="index.js"></script>
+</body>
+
+</html>
